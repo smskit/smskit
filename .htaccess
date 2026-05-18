@@ -1,0 +1,51 @@
+# TextFlow SMS Gateway - Apache Configuration
+
+# Force HTTPS
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [L,R=301]
+
+# Block direct access to config folder
+RewriteRule ^config/ - [F,L]
+
+# Pretty URLs for API v1
+RewriteBase /
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^api/v1/([^/]+)/?$ api/v1/$1.php [L,QSA]
+RewriteRule ^api/v1/([^/]+)/([^/]+)/?$ api/v1/$1.php?id=$2 [L,QSA]
+
+# Default index fallback
+DirectoryIndex index.php
+
+# Security headers
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "DENY"
+    Header always set X-XSS-Protection "1; mode=block"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+</IfModule>
+
+# Disable server signature
+ServerSignature Off
+
+# Protect sensitive files
+<FilesMatch "^\.">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+<FilesMatch "\.(json|log|sql)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# PHP settings
+<IfModule mod_php.c>
+    php_flag display_errors off
+    php_value upload_max_filesize 2M
+    php_value post_max_size 2M
+    php_value max_execution_time 30
+    php_value memory_limit 128M
+</IfModule>
