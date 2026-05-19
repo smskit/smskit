@@ -5,6 +5,7 @@
 **Self-hosted SMS Gateway — Turn any Android phone into your SMS relay.**
 
 [![GitHub Release](https://img.shields.io/github/v/release/smskit/smskit?style=for-the-badge&color=%23C8102E)](https://github.com/smskit/smskit/releases)
+![Views](https://hits.sh/github.com/smskit/smskit.svg)
 [![License MIT](https://img.shields.io/badge/license-MIT-green?style=for-the-badge)](LICENSE)
 [![PHP 7.4+](https://img.shields.io/badge/PHP-7.4%2B-8892BF?style=for-the-badge&logo=php&logoColor=white)](https://php.net)
 [![Android 5.0+](https://img.shields.io/badge/Android-5.0%2B-3DDC84?style=for-the-badge&logo=android&logoColor=white)](https://github.com/smskit/smskit/releases)
